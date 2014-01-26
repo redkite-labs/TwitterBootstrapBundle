@@ -15,7 +15,7 @@
  *
  */
 
-namespace RedKiteCms\Block\TwitterBootstrapBundle\Core\Block\Label;
+namespace RedKiteCms\Block\TwitterBootstrapBundle\Core\Block\PageHeader;
 
 use RedKiteLabs\RedKiteCmsBundle\Core\Content\Block\JsonBlock\AlBlockManagerJsonBlockContainer;
 
@@ -24,11 +24,8 @@ use RedKiteLabs\RedKiteCmsBundle\Core\Content\Block\JsonBlock\AlBlockManagerJson
  *
  * @author RedKite Labs <info@redkite-labs.com>
  */
-class AlBlockManagerBootstrapLabelBlock extends AlBlockManagerJsonBlockContainer
+class AlBlockManagerBootstrapPageHeaderBlock extends AlBlockManagerJsonBlockContainer
 {
-    protected $blockTemplate = 'TwitterBootstrapBundle:Content:Label/label.html.twig';
-    protected $editorTemplate = 'TwitterBootstrapBundle:Editor:Label/label_editor.html.twig';
-
     /**
      * Defines the App-Block's default value
      *
@@ -39,12 +36,12 @@ class AlBlockManagerBootstrapLabelBlock extends AlBlockManagerJsonBlockContainer
         $value =
             '
                 {
-                    "0" : {
-                        "label_text": "Label 1",
-                        "label_type": ""
+                    "0": {
+                        "page_header_title": "Page Header",
+                        "page_header_subtitle": "An awesome component",
+                        "page_header_tag": "h1"
                     }
-                }
-            ';
+                }';
 
         return array('Content' => $value);
     }
@@ -56,11 +53,11 @@ class AlBlockManagerBootstrapLabelBlock extends AlBlockManagerJsonBlockContainer
      */
     protected function renderHtml()
     {
-        $items = $this->decodeJsonContent($this->alBlock->getContent());
+        $item = $this->decodeJsonContent($this->alBlock->getContent());
 
         return array('RenderView' => array(
-            'view' => $this->blockTemplate,
-            'options' => array('data' => $items[0]),
+            'view' => 'TwitterBootstrapBundle:Content:PageHeader/page_header.html.twig',
+            'options' => array('data' => $item[0]),
         ));
     }
 
@@ -71,15 +68,14 @@ class AlBlockManagerBootstrapLabelBlock extends AlBlockManagerJsonBlockContainer
      */
     public function editorParameters()
     {
-        $items = $this->decodeJsonContent($this->alBlock->getContent());
-        $item = $items[0];
-
-        $bootstrapFormFactory = $this->container->get('twitter_bootstrap.bootstrap_form_factory');
-        $form = $bootstrapFormFactory->createForm('Label', 'AlLabelType', $item);
+        $item = $this->decodeJsonContent($this->alBlock->getContent());
+        
+        $formClass = $this->container->get('bootstrap_page_header_block.form');
+        $form = $this->container->get('form.factory')->create($formClass, $item[0]);
 
         return array(
-            "template" => $this->editorTemplate,
-            "title" => $this->translator->translate('label_block_editor_title', array(), 'TwitterBootstrapBundle'),
+            "template" => "TwitterBootstrapBundle:Editor:PageHeader/page_header_editor.html.twig",
+            "title" => $this->translator->translate('page_header_editor_title', array(), 'TwitterBootstrapBundle'),
             "form" => $form->createView(),
         );
     }
