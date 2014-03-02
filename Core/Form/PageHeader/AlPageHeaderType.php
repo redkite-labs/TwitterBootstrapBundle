@@ -15,17 +15,17 @@
  *
  */
 
-namespace RedKiteCms\Block\TwitterBootstrapBundle\Core\Form\Badge\Two;
+namespace RedKiteCms\Block\TwitterBootstrapBundle\Core\Form\PageHeader;
 
 use RedKiteCms\Block\TwitterBootstrapBundle\Core\Form\Base\AlBaseType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Defines the form to edit a badge block
+ * Defines the form to edit a Page Header block
  *
  * @author RedKite Labs <info@redkite-labs.com>
  */
-class AlBadgeType extends AlBaseType
+class AlPageHeaderType extends AlBaseType
 {
     /**
      * Builds the form
@@ -34,8 +34,19 @@ class AlBadgeType extends AlBaseType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('badge_text', null, array('label' => 'badge_block_text'));
-        $builder->add('badge_type', 'choice', array('label' => 'badge_block_type', 'choices' => array('' => 'base', 'badge-info' => 'info', 'badge-success' => 'success', 'badge-warning' => 'warning', 'badge-important' => 'important', 'badge-inverse' => 'inverse')));
+        $builder->add('page_header_title', null, array('label' => 'page_header_title',));
+        $builder->add('page_header_subtitle', null, array('label' => 'page_header_subtitle',));
+        $builder->add('page_header_tag', 'choice', array(
+            'label' => 'page_header_tag',
+            'choices' => array(
+                'h1' => 'h1',
+                'h2' => 'h2',
+                'h3' => 'h3',
+                'h4' => 'h4',
+                'h5' => 'h5',
+                'h6' => 'h6',
+            )
+        ));
         $this->addClassAttribute($builder);
 
         parent::buildForm($builder, $options);

@@ -15,36 +15,37 @@
  * 
  */
 
-namespace RedKiteCms\Block\TwitterBootstrapBundle\Tests\Unit\Core\Form\Three\Label;
+namespace RedKiteCms\Block\TwitterBootstrapBundle\Tests\Unit\Core\Form\PageHeader;
 
 use RedKiteLabs\RedKiteCmsBundle\Tests\Unit\Core\Form\Base\AlBaseType;
-use RedKiteCms\Block\TwitterBootstrapBundle\Core\Form\Label\Three\AlLabelType;
+use RedKiteCms\Block\TwitterBootstrapBundle\Core\Form\PageHeader\AlPageHeaderType;
 
 /**
- * AlLabelTypeTest
+ * AlPageHeaderTypeTest
  *
  * @author RedKite Labs <info@redkite-labs.com>
  */
-class AlLabelTypeTest extends AlBaseType
+class AlPageHeaderTypeTest extends AlBaseType
 {
     protected $translatorDomain = 'TwitterBootstrapBundle';
     
     protected function configureFields()
-    {
+    { 
         return array(
-            'label_text',
+            'page_header_title',
+            'page_header_subtitle',
             array(
-                'name' => 'label_type',
+                'name' => 'page_header_tag',
                 'type' => 'choice',
                 'options' => array(
-                    'label' => 'label_block_type',
+                    'label' => 'page_header_tag',
                     'choices' => array(
-                        'label-default' => 'base', 
-                        'label-primary' => 'primary', 
-                        'label-success' => 'success', 
-                        'label-info' => 'info', 
-                        'label-warning' => 'warning', 
-                        'label-danger' => 'danger', 
+                        'h1' => 'h1',
+                        'h2' => 'h2',
+                        'h3' => 'h3',
+                        'h4' => 'h4',
+                        'h5' => 'h5',
+                        'h6' => 'h6',
                     )
                 ),
             ),
@@ -62,7 +63,7 @@ class AlLabelTypeTest extends AlBaseType
     
     protected function getForm()
     {
-        return new AlLabelType();
+        return new AlPageHeaderType();
     }
     
     public function testDefaultOptions()
