@@ -1,3 +1,9 @@
+RedKite CMS Twitter Bootstrap Blocks 1.1.2 (2014/03/02)
+7e3c313 added Twitter Bootstrap Breadcrumb object
+1ac5582 merged extraOptions to rendering block options
+30f9fe9 added missing navigation button for small devices
+c8a4365 added css class attribute to Badge, Label, Button, DropdownButton and PageHeader blocks
+
 RedKite CMS Twitter Bootstrap Blocks 1.1.1 (2014/01/26)
 344df54 added page header block
 
